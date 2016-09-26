@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>DEMO1 - D3 LABS - KARTHIK T - vst216</title>
+        <style>
+            body {
+                font-family: initial;
+            }
+            h1 { 
+                background-color: black;
+                color: white;
+            }
+            .inputForm {
+                padding-bottom: 5px;
+                border-bottom: 1px solid #eee;                
+            }
+            ul#countries {
+                list-style: none;
+                margin: 0px;                
+                padding: 0px !important;
+            }
+            ul#countries li {
+                padding: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h1 id="title">Gapiminder - Wealth and Health</h1>
+        </div>
+        <div class="inputForm">
+            <h2>Countries</h2>
+            <label>Name</label>
+            <input type="text" id="textInput">
+            <button onclick="addCountry();">Add</button>
+        </div>
+        <ul id="countries">
+        </ul>
+    </body>
+    <script>    
+        function addCountry() {
+            var country = document.getElementById("textInput").value;
+            
+            if(country) { // not empty
+                var new_country = document.createElement("li");
+                new_country.innerHTML = country;
+                var country_list = document.getElementById("countries");
+                country_list.appendChild(new_country);
+            }
+        }
+    </script>
+</html>
