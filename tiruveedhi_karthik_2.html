@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>DEMO1 - D3 LABS - KARTHIK T - vst216</title>
+        <style>
+            body {
+                font-family: initial;
+            }
+            h1 { 
+                background-color: black;
+                color: white;
+            }
+            .inputForm {
+                padding-bottom: 5px;
+                border-bottom: 1px solid #eee;                
+            }
+            ul#countries {
+                list-style: none;
+                margin: 0px;                
+                padding: 0px !important;
+            }
+            ul#countries li {
+                padding: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h1 id="title">Gapiminder - Wealth and Health</h1>
+        </div>
+        <div class="inputForm">
+            <h2>Countries</h2>
+        </div>
+        <ul id="countries">
+        </ul>
+    </body>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script>    
+        var data_file = 'https://raw.githubusercontent.com/CristianFelix/infoviz/master/gapminder.json'
+        var countries; //global variable. lol.
+        var viz = d3.select("#countries")
+
+        d3.json(data_file, function(err, data) {
+            if (err) window.alert('Data Invalid')
+            countries = data;
+            renderCountries();
+        })
+
+        //Function -
+        function renderCountries() {
+            viz.selectAll("li")
+                .data(countries)
+                .enter()
+                .append('li')
+                .text(function(country) {
+                    return country.name; // country data accessible
+                })
+        }
+    </script>
+</html>
