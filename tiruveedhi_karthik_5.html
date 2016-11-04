@@ -169,20 +169,24 @@
 
         function render(data) {
             var countries = data.filter(function(d) { return d.income[vizYear] && d.lifeExpectancy[vizYear] && d.population[vizYear]}) //only 2008
+            renderList([""]); //re-render view, removing all elements
             renderList(countries);
             renderChart(countries);
         }
 
+        //Data may be new & sorted, but existing DOM elements are not sorted..
+        //Enter - New data items binded to new placeholder elements that are Appended
+        //Exit - Old data items no longer there in dataset compared to binded in DOM is removed
         function renderList(countries) {
             var selection = legend.selectAll("li")
                                 .data(countries.sort(function(a, b){
                                     return d3.ascending(a.name, b.name);
                                 }), function(d) { //key tied to dot
-                                    return d.name;
+                                   return d.name;
                                 })
 
                 selection
-                    .enter()
+                    .enter() //refers to 'new' data items, what to do with them.
                     .append('li')
                     .text(function(country) {
                         return country.name; // country data accessible
@@ -193,7 +197,7 @@
                     .on("mouseleave", function(d, i) {
                         unHighlight(d.name)
                     })
-                selection.exit().remove()
+                selection.exit().remove(); //refers to the data items no longer there, manipulate their corresponding DOM then
         }
 
         function renderChart(countries) {
